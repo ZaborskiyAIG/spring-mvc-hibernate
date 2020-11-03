@@ -18,13 +18,12 @@ public class CarController {
 
     @GetMapping
     public String getCars(@RequestParam(defaultValue = "5") Integer count, Model model) {
-        Integer maxSizeList = 5;
 
-        if (count > maxSizeList) {
-            model.addAttribute("cars", carService.getCarsByCount(maxSizeList));
-        } else {
-            model.addAttribute("cars", carService.getCarsByCount(count));
+        if (count > 5) {
+            count = 5;
         }
+
+        model.addAttribute("cars", carService.getCarsByCount(count));
 
         return "cars";
     }
