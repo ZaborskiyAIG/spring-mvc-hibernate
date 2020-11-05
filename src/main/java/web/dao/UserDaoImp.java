@@ -5,6 +5,7 @@ import web.model.User;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import java.util.List;
 
@@ -28,8 +29,9 @@ public class UserDaoImp implements UserDao {
 
    @Override
    public void remove(Long id) {
-      User user = entityManager.find(User.class, id);
-      entityManager.remove(user);
+      Query query = entityManager.createQuery("delete from User user where user.id = :id");
+      query.setParameter("id", id);
+      query.executeUpdate();
    }
 
    @Override

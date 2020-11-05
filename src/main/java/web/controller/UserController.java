@@ -11,7 +11,7 @@ import web.model.User;
 import web.service.UserService;
 
 @Controller
-@RequestMapping("/")
+@RequestMapping
 public class UserController {
 
     @Autowired
@@ -23,25 +23,25 @@ public class UserController {
         return "index";
     }
 
-    @PostMapping(value = "add")
+    @PostMapping(value = "/add")
     public String addUser(@ModelAttribute("user") User user){
         userService.add(user);
         return "redirect:/";
     }
 
-    @PostMapping(value = "delete")
+    @PostMapping(value = "/delete")
     public String deleteUser(@ModelAttribute("id") Long id){
         userService.remove(id);
         return "redirect:/";
     }
 
-    @PostMapping(value = "update")
+    @PostMapping(value = "/update")
     public String updateUser(@ModelAttribute("user") User user){
         userService.update(user);
         return "redirect:/";
     }
 
-    @GetMapping(value = "update")
+    @GetMapping(value = "/update")
     public String updateUser(@ModelAttribute("id") Long id, Model model){
         User user = userService.getUserById(id) ;
         model.addAttribute("user",user);
